@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
+using Toggl.Ultrawave.Models;
 
 namespace Toggl.Ultrawave.ApiClients
 {
