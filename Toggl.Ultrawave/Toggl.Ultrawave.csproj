@@ -29,6 +29,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Models\TimeEntry.cs" />
+    <Compile Include="Models\WorkspaceFeature.cs" />
     <Compile Include="Network\Credentials.cs" />
     <Compile Include="Network\Endpoints\Endpoint.cs" />
     <Compile Include="Network\Endpoints\Endpoints.cs" />
