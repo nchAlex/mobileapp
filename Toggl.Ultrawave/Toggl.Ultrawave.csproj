@@ -28,6 +28,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ApiClients\Interfaces\IWorkspaceFeaturesApi.cs" />
+    <Compile Include="ApiClients\WorkspaceFeaturesApi.cs" />
     <Compile Include="Models\TimeEntry.cs" />
     <Compile Include="Models\WorkspaceFeature.cs" />
     <Compile Include="Network\Credentials.cs" />
