@@ -2,7 +2,7 @@
 
 namespace Toggl.Ultrawave.Models
 {
-    public sealed partial class Client
+    internal sealed partial class Client
     {
         public Client() { }
 
@@ -16,7 +16,7 @@ namespace Toggl.Ultrawave.Models
         }
     }
 
-    public sealed partial class Project
+    internal sealed partial class Project
     {
         public Project() { }
 
@@ -41,7 +41,7 @@ namespace Toggl.Ultrawave.Models
         }
     }
 
-    public sealed partial class Tag
+    internal sealed partial class Tag
     {
         public Tag() { }
 
@@ -54,7 +54,7 @@ namespace Toggl.Ultrawave.Models
         }
     }
 
-    public sealed partial class Task
+    internal sealed partial class Task
     {
         public Task() { }
 
@@ -72,7 +72,7 @@ namespace Toggl.Ultrawave.Models
         }
     }
 
-    public sealed partial class TimeEntry
+    internal sealed partial class TimeEntry
     {
         public TimeEntry() { }
 
@@ -96,7 +96,7 @@ namespace Toggl.Ultrawave.Models
         }
     }
 
-    public sealed partial class User
+    internal sealed partial class User
     {
         public User() { }
 
@@ -123,7 +123,7 @@ namespace Toggl.Ultrawave.Models
         }
     }
 
-    public sealed partial class Workspace
+    internal sealed partial class Workspace
     {
         public Workspace() { }
 

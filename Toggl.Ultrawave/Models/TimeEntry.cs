@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Toggl.Ultrawave.Models
 {
-    public sealed partial class TimeEntry : ITimeEntry
+    internal sealed partial class TimeEntry : ITimeEntry
     {
         public long Id { get; set; }
 
