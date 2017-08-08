@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reactive.Linq;
+using Toggl.Multivac.Models;
 using Toggl.Ultrawave.Models;
 using Toggl.Ultrawave.Network;
 using Toggl.Ultrawave.Serialization;
@@ -16,16 +18,17 @@ namespace Toggl.Ultrawave.ApiClients
             this.endPoints = endPoints;
         }
 
-        public IObservable<List<Client>> GetAll()
+        public IObservable<List<IClient>> GetAll()
         {
             var observable = CreateObservable<List<Client>>(endPoints.Get, AuthHeader);
-            return observable;
+            return observable.Cast<List<IClient>>();
         }
 
-        public IObservable<Client> Create(Client client)
+        public IObservable<IClient> Create(IClient client)
         {
             var endPoint = endPoints.Post(client.WorkspaceId);
-            var observable = CreateObservable<Client>(endPoint, AuthHeader, client, SerializationReason.Post);
+            var clientCopy = client as Client ?? new Client(client);
+            var observable = CreateObservable<Client>(endPoint, AuthHeader, clientCopy, SerializationReason.Post).Cast<IClient>();
             return observable;
         }
     }
