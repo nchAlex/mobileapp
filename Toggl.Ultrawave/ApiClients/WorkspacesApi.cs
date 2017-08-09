@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reactive.Linq;
 using Toggl.Multivac.Models;
 using Toggl.Ultrawave.Models;
@@ -22,7 +23,7 @@ namespace Toggl.Ultrawave.ApiClients
         public IObservable<List<IWorkspace>> GetAll()
         {
             var observable = CreateObservable<List<Workspace>>(endPoints.Get, AuthHeader);
-            return observable.Cast<List<IWorkspace>>();
+            return observable.Select(workspaces => workspaces?.Cast<IWorkspace>().ToList());
         }
 
         public IObservable<IWorkspace> GetById(long id)

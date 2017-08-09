@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reactive.Linq;
 using Toggl.Multivac.Models;
 using Toggl.Ultrawave.Models;
@@ -21,7 +22,7 @@ namespace Toggl.Ultrawave.ApiClients
         public IObservable<List<IClient>> GetAll()
         {
             var observable = CreateObservable<List<Client>>(endPoints.Get, AuthHeader);
-            return observable.Cast<List<IClient>>();
+            return observable.Select(clients => clients?.Cast<IClient>().ToList());
         }
 
         public IObservable<IClient> Create(IClient client)

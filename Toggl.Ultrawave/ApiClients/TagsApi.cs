@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reactive.Linq;
 using Toggl.Multivac.Models;
 using Toggl.Ultrawave.Models;
@@ -20,6 +21,6 @@ namespace Toggl.Ultrawave.ApiClients
 
         public IObservable<List<ITag>> GetAll()
             => CreateObservable<List<Tag>>(endPoints.Get, AuthHeader)
-                .Cast<List<ITag>>();
+                .Select(tags => tags?.Cast<ITag>().ToList());
     }
 }
