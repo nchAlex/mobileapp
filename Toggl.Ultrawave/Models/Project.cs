@@ -5,7 +5,7 @@ using Toggl.Ultrawave.Serialization;
 
 namespace Toggl.Ultrawave.Models
 {
-    internal sealed partial class Project : IProject
+    public sealed partial class Project : IProject
     {
         public long Id { get; set; }
 

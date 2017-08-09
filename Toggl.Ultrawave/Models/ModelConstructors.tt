@@ -22,7 +22,7 @@ namespace Toggl.Ultrawave.Models
         if (!isFirst)
             WriteLine("");
 
-        WriteLine($"    internal sealed partial class {className}");
+        WriteLine($"    public sealed partial class {className}");
         WriteLine( "    {");
         WriteLine($"        public {className}() {{ }}\n");
         WriteLine($"        public {className}({interfaceName} entity)");

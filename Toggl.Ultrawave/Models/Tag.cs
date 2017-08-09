@@ -4,7 +4,7 @@ using Toggl.Multivac.Models;
 
 namespace Toggl.Ultrawave.Models
 {
-    internal sealed partial class Tag : ITag
+    public sealed partial class Tag : ITag
     {
         public long Id { get; set; }
 
