@@ -1,4 +1,4 @@
-﻿﻿using Toggl.Multivac.Models;
+﻿using Toggl.Multivac.Models;
 
 namespace Toggl.Ultrawave.Models
 {
