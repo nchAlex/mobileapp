@@ -13,11 +13,10 @@ namespace Toggl.Ultrawave.Tests.Integration
 {
     public class ProjectsApiTests
     {
-        public class TheGetAllMethod : AuthenticatedEndpointBaseTests<List<Project>>
+        public class TheGetAllMethod : AuthenticatedEndpointBaseTests<List<IProject>>
         {
-            protected override IObservable<List<Project>> CallEndpointWith(ITogglApi togglApi)
-                => togglApi.Projects.GetAll()
-                           .Select(projects => projects?.Cast<Project>().ToList());
+            protected override IObservable<List<IProject>> CallEndpointWith(ITogglApi togglApi)
+                => togglApi.Projects.GetAll();
 
             [Fact, LogTestInfo]
             public async System.Threading.Tasks.Task ReturnsAllProjects()
@@ -34,8 +33,8 @@ namespace Toggl.Ultrawave.Tests.Integration
 
                 projects.Should().HaveCount(2);
 
-                projects.Should().Contain(project => isTheSameAs(projectAPosted, project));
-                projects.Should().Contain(project => isTheSameAs(projectBPosted, project));
+                projects.Should().Contain(project => isTheSameAs(projectAPosted, new Project(project)));
+                projects.Should().Contain(project => isTheSameAs(projectBPosted, new Project(project)));
             }
 
             [Fact, LogTestInfo]
@@ -52,8 +51,8 @@ namespace Toggl.Ultrawave.Tests.Integration
                 var projects = await CallEndpointWith(togglClient);
 
                 projects.Should().HaveCount(1);
-                projects.Should().Contain(project => isTheSameAs(project, (Project) activeProjectPosted));
-                projects.Should().NotContain(project => isTheSameAs(project, (Project) inactiveProjectPosted));
+                projects.Should().Contain(project => isTheSameAs(new Project(project), (Project) activeProjectPosted));
+                projects.Should().NotContain(project => isTheSameAs(new Project(project), (Project) inactiveProjectPosted));
             }
 
             [Fact, LogTestInfo]

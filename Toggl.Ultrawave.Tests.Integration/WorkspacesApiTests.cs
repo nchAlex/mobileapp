@@ -16,11 +16,10 @@ namespace Toggl.Ultrawave.Tests.Integration
 {
     public class WorkspacesApiTests
     {
-        public class TheGetMethod : AuthenticatedEndpointBaseTests<List<Workspace>>
+        public class TheGetMethod : AuthenticatedEndpointBaseTests<List<IWorkspace>>
         {
-            protected override IObservable<List<Workspace>> CallEndpointWith(ITogglApi togglApi)
-                => togglApi.Workspaces.GetAll()
-                           .Select(workspaces => workspaces?.Cast<Workspace>().ToList());
+            protected override IObservable<List<IWorkspace>> CallEndpointWith(ITogglApi togglApi)
+                => togglApi.Workspaces.GetAll();
 
             [Fact, LogTestInfo]
             public async Task ReturnsAllWorkspaces()
