@@ -10,6 +10,7 @@ namespace Toggl.PrimeRadiant.Realm
         public Database()
         {
             IdProvider = new IdProvider();
+            SinceParameters = new SinceParameterStorage();
             Tags = Repository<IDatabaseTag>.For(tag => tag as RealmTag ?? new RealmTag(tag));
             Tasks = Repository<IDatabaseTask>.For(task => task as RealmTask ?? new RealmTask(task));
             User = SingleObjectStorage<IDatabaseUser>.For(user => user as RealmUser ?? new RealmUser(user));
@@ -20,6 +21,7 @@ namespace Toggl.PrimeRadiant.Realm
         }
 
         public IIdProvider IdProvider { get; }
+        public ISinceParameterRepository SinceParameters { get; }
         public IRepository<IDatabaseTag> Tags { get; }
         public IRepository<IDatabaseTask> Tasks { get; }
         public IRepository<IDatabaseClient> Clients { get; }
