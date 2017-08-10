@@ -24,7 +24,7 @@ namespace Toggl.Ultrawave.ApiClients
         {
             var endPoint = endPoints.Post(client.WorkspaceId);
             var clientCopy = client as Client ?? new Client(client);
-            var observable = CreateObservable<Client>(endPoint, AuthHeader, clientCopy, SerializationReason.Post);
+            var observable = CreateObservable(endPoint, AuthHeader, clientCopy, SerializationReason.Post);
             return observable;
         }
     }
