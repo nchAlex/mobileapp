@@ -24,17 +24,17 @@ namespace Toggl.Ultrawave.Tests.Integration
                 var (togglClient, user) = await SetupTestUser();
 
                 var projectA = await createNewProject(togglClient, user.DefaultWorkspaceId, createClient: true);
-                var projectAPosted = await togglClient.Projects.Create(projectA).Cast<Project>();
+                var projectAPosted = await togglClient.Projects.Create(projectA);
 
                 var projectB = await createNewProject(togglClient, user.DefaultWorkspaceId);
-                var projectBPosted = await togglClient.Projects.Create(projectB).Cast<Project>();
+                var projectBPosted = await togglClient.Projects.Create(projectB);
 
                 var projects = await CallEndpointWith(togglClient);
 
                 projects.Should().HaveCount(2);
 
-                projects.Should().Contain(project => isTheSameAs(projectAPosted, new Project(project)));
-                projects.Should().Contain(project => isTheSameAs(projectBPosted, new Project(project)));
+                projects.Should().Contain(project => isTheSameAs(projectAPosted, project));
+                projects.Should().Contain(project => isTheSameAs(projectBPosted, project));
             }
 
             [Fact, LogTestInfo]
@@ -51,8 +51,8 @@ namespace Toggl.Ultrawave.Tests.Integration
                 var projects = await CallEndpointWith(togglClient);
 
                 projects.Should().HaveCount(1);
-                projects.Should().Contain(project => isTheSameAs(new Project(project), (Project) activeProjectPosted));
-                projects.Should().NotContain(project => isTheSameAs(new Project(project), (Project) inactiveProjectPosted));
+                projects.Should().Contain(project => isTheSameAs(project, activeProjectPosted));
+                projects.Should().NotContain(project => isTheSameAs(project, inactiveProjectPosted));
             }
 
             [Fact, LogTestInfo]
@@ -128,7 +128,7 @@ namespace Toggl.Ultrawave.Tests.Integration
                 };
             }
 
-            private static bool isTheSameAs(Project a, Project b)
+            private static bool isTheSameAs(IProject a, IProject b)
                 => a.Id == b.Id
                 && a.Name == b.Name
                 && a.ClientId == b.ClientId
