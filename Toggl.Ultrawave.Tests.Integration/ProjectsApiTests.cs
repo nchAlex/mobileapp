@@ -74,9 +74,9 @@ namespace Toggl.Ultrawave.Tests.Integration
                 activeProjects.Should().BeNull();
             }
 
-            public class TheCreateMethod : AuthenticatedPostEndpointBaseTests<Project>
+            public class TheCreateMethod : AuthenticatedPostEndpointBaseTests<IProject>
             {
-                protected override IObservable<Project> CallEndpointWith(ITogglApi togglApi)
+                protected override IObservable<IProject> CallEndpointWith(ITogglApi togglApi)
                     => Observable.Defer(async () =>
                     {
                         var user = await togglApi.User.Get();
@@ -84,8 +84,8 @@ namespace Toggl.Ultrawave.Tests.Integration
                         return CallEndpointWith(togglApi, project);
                     });
 
-                private IObservable<Project> CallEndpointWith(ITogglApi togglApi, Project project)
-                    => togglApi.Projects.Create(project).Cast<Project>();
+                private IObservable<IProject> CallEndpointWith(ITogglApi togglApi, IProject project)
+                    => togglApi.Projects.Create(project);
 
                 [Fact, LogTestInfo]
                 public async System.Threading.Tasks.Task CreatesNewProject()
