@@ -1,4 +1,4 @@
-﻿﻿using Realms;
+﻿﻿﻿using Realms;
 using System.Linq;
 using Toggl.Multivac.Models;
 using Toggl.PrimeRadiant.Models;
@@ -23,7 +23,8 @@ namespace Toggl.PrimeRadiant.Realm
         public RealmClient(IClient entity, Realms.Realm realm)
         {
             Id = entity.Id;
-            RealmWorkspace = realm.All<RealmWorkspace>().Single(x => x.Id == WorkspaceId);
+            var actualWorkspaceId = entity?.WorkspaceId ?? 0;
+            RealmWorkspace = realm.All<RealmWorkspace>().SingleOrDefault(x => x.Id == actualWorkspaceId);
             Name = entity.Name;
             At = entity.At;
             ServerDeletedAt = entity.ServerDeletedAt;
@@ -49,8 +50,10 @@ namespace Toggl.PrimeRadiant.Realm
         public RealmProject(IProject entity, Realms.Realm realm)
         {
             Id = entity.Id;
-            RealmWorkspace = realm.All<RealmWorkspace>().Single(x => x.Id == WorkspaceId);
-            RealmClient = realm.All<RealmClient>().Single(x => x.Id == ClientId);
+            var actualWorkspaceId = entity?.WorkspaceId ?? 0;
+            RealmWorkspace = realm.All<RealmWorkspace>().SingleOrDefault(x => x.Id == actualWorkspaceId);
+            var actualClientId = entity?.ClientId ?? 0;
+            RealmClient = realm.All<RealmClient>().SingleOrDefault(x => x.Id == actualClientId);
             Name = entity.Name;
             IsPrivate = entity.IsPrivate;
             Active = entity.Active;
@@ -86,7 +89,8 @@ namespace Toggl.PrimeRadiant.Realm
         public RealmTag(ITag entity, Realms.Realm realm)
         {
             Id = entity.Id;
-            RealmWorkspace = realm.All<RealmWorkspace>().Single(x => x.Id == WorkspaceId);
+            var actualWorkspaceId = entity?.WorkspaceId ?? 0;
+            RealmWorkspace = realm.All<RealmWorkspace>().SingleOrDefault(x => x.Id == actualWorkspaceId);
             Name = entity.Name;
             At = entity.At;
             IsDirty = true;
@@ -112,9 +116,12 @@ namespace Toggl.PrimeRadiant.Realm
         {
             Id = entity.Id;
             Name = entity.Name;
-            RealmProject = realm.All<RealmProject>().Single(x => x.Id == ProjectId);
-            RealmWorkspace = realm.All<RealmWorkspace>().Single(x => x.Id == WorkspaceId);
-            RealmUser = realm.All<RealmUser>().Single(x => x.Id == UserId);
+            var actualProjectId = entity?.ProjectId ?? 0;
+            RealmProject = realm.All<RealmProject>().SingleOrDefault(x => x.Id == actualProjectId);
+            var actualWorkspaceId = entity?.WorkspaceId ?? 0;
+            RealmWorkspace = realm.All<RealmWorkspace>().SingleOrDefault(x => x.Id == actualWorkspaceId);
+            var actualUserId = entity?.UserId ?? 0;
+            RealmUser = realm.All<RealmUser>().SingleOrDefault(x => x.Id == actualUserId);
             EstimatedSeconds = entity.EstimatedSeconds;
             Active = entity.Active;
             At = entity.At;
@@ -141,9 +148,12 @@ namespace Toggl.PrimeRadiant.Realm
         public RealmTimeEntry(ITimeEntry entity, Realms.Realm realm)
         {
             Id = entity.Id;
-            RealmWorkspace = realm.All<RealmWorkspace>().Single(x => x.Id == WorkspaceId);
-            RealmProject = realm.All<RealmProject>().Single(x => x.Id == ProjectId);
-            RealmTask = realm.All<RealmTask>().Single(x => x.Id == TaskId);
+            var actualWorkspaceId = entity?.WorkspaceId ?? 0;
+            RealmWorkspace = realm.All<RealmWorkspace>().SingleOrDefault(x => x.Id == actualWorkspaceId);
+            var actualProjectId = entity?.ProjectId ?? 0;
+            RealmProject = realm.All<RealmProject>().SingleOrDefault(x => x.Id == actualProjectId);
+            var actualTaskId = entity?.TaskId ?? 0;
+            RealmTask = realm.All<RealmTask>().SingleOrDefault(x => x.Id == actualTaskId);
             Billable = entity.Billable;
             Start = entity.Start;
             Stop = entity.Stop;
@@ -153,7 +163,8 @@ namespace Toggl.PrimeRadiant.Realm
             TagIds = entity.TagIds;
             At = entity.At;
             ServerDeletedAt = entity.ServerDeletedAt;
-            RealmUser = realm.All<RealmUser>().Single(x => x.Id == UserId);
+            var actualUserId = entity?.UserId ?? 0;
+            RealmUser = realm.All<RealmUser>().SingleOrDefault(x => x.Id == actualUserId);
             CreatedWith = entity.CreatedWith;
             IsDirty = true;
         }
