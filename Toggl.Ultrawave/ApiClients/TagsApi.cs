@@ -20,7 +20,6 @@ namespace Toggl.Ultrawave.ApiClients
         }
 
         public IObservable<List<ITag>> GetAll()
-            => CreateObservable<List<Tag>>(endPoints.Get, AuthHeader)
-                .Select(tags => tags?.Cast<ITag>().ToList());
+            => CreateListObservable<Tag, ITag>(endPoints.Get, AuthHeader);
     }
 }

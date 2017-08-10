@@ -21,10 +21,7 @@ namespace Toggl.Ultrawave.ApiClients
         }
 
         public IObservable<List<IWorkspace>> GetAll()
-        {
-            var observable = CreateObservable<List<Workspace>>(endPoints.Get, AuthHeader);
-            return observable.Select(workspaces => workspaces?.Cast<IWorkspace>().ToList());
-        }
+            => CreateListObservable<Workspace, IWorkspace>(endPoints.Get, AuthHeader);
 
         public IObservable<IWorkspace> GetById(long id)
         {

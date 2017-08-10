@@ -20,10 +20,7 @@ namespace Toggl.Ultrawave.ApiClients
         }
 
         public IObservable<List<IProject>> GetAll()
-        {
-            var observable = CreateObservable<List<Project>>(endPoints.Get, AuthHeader);
-            return observable.Select(projects => projects?.Cast<IProject>().ToList());
-        }
+            => CreateListObservable<Project, IProject>(endPoints.Get, AuthHeader);
 
         public IObservable<IProject> Create(IProject project)
         {
