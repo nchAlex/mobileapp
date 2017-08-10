@@ -30,14 +30,14 @@ namespace Toggl.Ultrawave.ApiClients
         }
 
         protected IObservable<List<TInterface>> CreateListObservable<TModel, TInterface>(Endpoint endpoint, HttpHeader header, List<TModel> entities, SerializationReason serializationReason)
-			where TModel : class, TInterface
+            where TModel : class, TInterface
         {
-            var body = serializer.Serialize<List<TModel>>(entities, serializationReason);
+            var body = serializer.Serialize(entities, serializationReason);
             return CreateListObservable<TModel, TInterface>(endpoint, header, body);
         }
 
-		protected IObservable<List<TInterface>> CreateListObservable<TModel, TInterface>(Endpoint endpoint, HttpHeader header, string body = "")
-			where TModel : class, TInterface
+        protected IObservable<List<TInterface>> CreateListObservable<TModel, TInterface>(Endpoint endpoint, HttpHeader header, string body = "")
+            where TModel : class, TInterface
             => CreateListObservable<TModel, TInterface>(endpoint, new [] { header }, body);
 
 
