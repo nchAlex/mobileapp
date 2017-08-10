@@ -27,9 +27,9 @@ namespace Toggl.Foundation.MvvmCross.ViewModels
             StartTimeEntryCommand = new MvxAsyncCommand(startTimeEntry);
         }
 
-        public override void Appeared()
+        public override void ViewAppeared()
         {
-            base.Appeared();
+            base.ViewAppeared();
             navigationService.Navigate<SuggestionsViewModel>();
             navigationService.Navigate<TimeEntriesLogViewModel>();
         }
